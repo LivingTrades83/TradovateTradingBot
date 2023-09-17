@@ -27,4 +27,6 @@ The cog will bring you to the settings and you must create a preset for a stop l
 
 3. After that you should be good to go. The program takes trades when there is an engulfing candle either bullish or bearish. You can test individual functions by commenting out the while loop and running each one through. I recommend doing this so you know that everything is working properly. Unfortunately This will never make you money because candlestick patterns alone won't be enough to give you any indication of a winning trade but it is fun to watch trades be made for you.
 
-Here is how the Bot works in steps. 
+Here is how the Bot works in steps. Set the chart time frame to 3 minutes. You can start the program whenever you'd like because it takes a screen shot a few seconds before the end of every 3 minutes. This way it can determine if one candle has engulfed another and then take a trade. If not then it does not nothing and waits for the next 3 minutes to pass by. Timer is based on the local computer's clock so make sure its synched with tradovates clock. 
+
+So, run the program, then have all the necessary components of tradovate on your screen so it can view the chart. At the first 3 minute mark, you will either see the console print "nothing" or either "Short position" or "Long position". 
