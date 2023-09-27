@@ -5,11 +5,39 @@ import cv2
 import numpy as np
 from itertools import zip_longest
 import datetime
-# Main Loop
-"""
+
+time.sleep(5.0)
+
+counter = 0
 while keyboard.is_pressed('q') == False:
-    pass
-"""
+
+    now = datetime.datetime.now()
+    minute = (now.minute + 1) / 3
+    second = now.second
+    one = pag.locateOnScreen('Images\\USD.PNG')
+
+    if minute.is_integer() or now.minute == 0:
+        if second == 55:
+            print("heard")
+            open_cv_image = screenshot_me()
+            img, red_rectangles, green_rectangles, rec_list, highest_y, lowest_y = determine_candles(open_cv_image)
+            if one == None:
+                print('nothing')
+                
+            if one != None:
+                resultGreen = green_engulfing(rec_list)
+                resultRed = red_engulfing(rec_list)
+                print(resultGreen, resultRed)
+                if resultGreen == True:
+                    stop_loss_long(highest_y, lowest_y)
+                else: pass
+
+                if resultRed == True:
+                    stop_loss_short(highest_y, lowest_y)
+                else: pass
+                print(counter)
+                counter += 1
+
 def press_buy():
     coords = pag.center(pag.locateOnScreen('Images\MarketBuy.PNG'))
     time.sleep(0.1)
@@ -200,37 +228,3 @@ def red_engulfing(rectangles):
             return True
         else: return False
     else: return False
-
-    
-
-time.sleep(5.0)
-
-counter = 0
-while keyboard.is_pressed('q') == False:
-
-    now = datetime.datetime.now()
-    minute = (now.minute + 1) / 3
-    second = now.second
-    one = pag.locateOnScreen('Images\\USD.PNG')
-
-    if minute.is_integer() or now.minute == 0:
-        if second == 55:
-            print("heard")
-            open_cv_image = screenshot_me()
-            img, red_rectangles, green_rectangles, rec_list, highest_y, lowest_y = determine_candles(open_cv_image)
-            if one == None:
-                print('nothing')
-                
-            if one != None:
-                resultGreen = green_engulfing(rec_list)
-                resultRed = red_engulfing(rec_list)
-                print(resultGreen, resultRed)
-                if resultGreen == True:
-                    stop_loss_long(highest_y, lowest_y)
-                else: pass
-
-                if resultRed == True:
-                    stop_loss_short(highest_y, lowest_y)
-                else: pass
-                print(counter)
-                counter += 1
